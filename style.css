@@ -1,0 +1,340 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Layout structure */
+body {
+    display: flex;
+    height: 100vh;
+    color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    color: white;
+    width: 200px;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+.sidebar ul li {
+    margin: 1em 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #0056b3;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Header */
+header {
+    background: linear-gradient(190deg, #007bff, #00d4ff);
+    color: white;
+    padding: 1em;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+
+/* Top Navigation Bar */
+.top-nav {
+    margin-top: 10px;
+}
+
+.top-nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.top-nav ul li {
+    display: inline;
+}
+
+.top-nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.top-nav ul li a:hover {
+    background-color: #0056b3;
+}
+
+/* Filters Section */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters label, .filters select, .filters button {
+    font-size: 1em;
+}
+
+/* Cards Section */
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 5px;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: #007bff;
+}
+
+/* Charts Section */
+.charts {
+    display: flex; /* Enables flexbox */
+    gap: 20px; /* Space between the charts */
+    flex-direction: row; /* Aligns items in a row */
+    justify-content: center; /* Centers the charts horizontally */
+    align-items: center; /* Aligns items vertically */
+}
+
+/* Canvas styling */
+canvas {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Adjust this as needed */
+    max-width: 500px; /* Restrict the maximum width */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 300px; /* Restrict the maximum height */
+}
+
+/* Footer */
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+
+    .charts {
+        flex-direction: column;
+    }
+
+    .top-nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.about-content {
+    padding: 20px;
+}
+
+.about-content h2 {
+    color: #007bff;
+    margin-top: 20px;
+}
+
+.about-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.about-content p, .about-content li {
+    line-height: 1.6;
+}
+
+/* FAQ Page Content */
+.faq-content {
+    padding: 20px;
+}
+
+.faq-content h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    color: #007bff;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.faq-item p {
+    line-height: 1.6;
+    margin-left: 20px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.card {
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 200px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.card p {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 1.5em;
+    color: #007bff;
+  }
+ 
+.filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    background-color: #f8f9fa; /* Light background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 400px;
+}
+
+/* Style the filter group */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Style the label */
+.filter-group label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333; /* Dark text color */
+}
+
+/* Style the select dropdown */
+.filter-group select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dropdown hover and focus effect */
+.filter-group select:focus {
+    border-color: #007bff; /* Blue focus border */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Style the update button */
+.update-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Button hover and active effect */
+.update-button:hover {
+    background: linear-gradient(135deg, #0056b3, #00d4ff); /* Darker blue */
+}
+
+.update-button:active {
+    transform: scale(0.98); /* Slight press effect */
+}
