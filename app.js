@@ -15,7 +15,7 @@ async function fetchLiveData(location) {
 
     
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/air_pollution?lat=${cityCoordinates.latitude}&lon=${cityCoordinates.longitude}&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${cityCoordinates.latitude}&lon=${cityCoordinates.longitude}&appid=${apiKey}`
     );
 
     if (!response.ok) {
@@ -44,7 +44,7 @@ async function fetchLiveData(location) {
     };
   } catch (error) {
     console.error("Error fetching live data:", error);
-    alert(`Failed to fetch data for ${location}. Please try again.`);
+    alert(`Failed to fetch data for ${location}. Ends bolku bhshig bn.`);
     return null;
   }
 }
