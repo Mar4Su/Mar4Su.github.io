@@ -318,7 +318,7 @@ footer a:hover {
 }
 
 /* Style the update button */
-.update-button {
+.search-button {
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
     font-weight: bold;
@@ -331,10 +331,10 @@ footer a:hover {
 }
 
 /* Button hover and active effect */
-.update-button:hover {
+.search-button:hover {
     background: linear-gradient(135deg, #0056b3, #00d4ff); /* Darker blue */
 }
 
-.update-button:active {
+.search-button:active {
     transform: scale(0.98); /* Slight press effect */
 }

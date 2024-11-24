@@ -11,7 +11,7 @@
     <div class="sidebar">
         <h2>Dashboard</h2>
         <ul>
-            <li><a href="index.html">HUB</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="faq.html">FAQs</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
@@ -27,21 +27,20 @@
 
         <!-- Filters Section -->
         <section class="filters">
-            <div class="filter-group">
-                <label for="station">Select City:</label>
-                <select id="station">
-                    <option value="seoul">Seoul</option>
-                    <option value="busan">Busan</option>
-                    <option value="daegu">Daegu</option>
-                    <option value="ub">Ulaanbaatar MGL</option>
-                </select>
-            </div>
-            <button class="update-button">Update</button>
-        </section>
-
+          <div class="filter-group">
+              <label for="city-search">Search City:</label>
+              <input type="text" id="city-search" placeholder="Enter city name">
+          </div>
+          <button class="search-button">Search</button>
+      </section>
+      
         <!-- Cards Section -->
         <section class="cards">
-            <div class="card">
+          <div class="card">
+            <h3>Found City</h3>
+            <p id="foundcity">--</p>
+          </div>
+              <div class="card">
                 <h3>Air Quality Index (AQI)</h3>
                 <p id="aqi">--</p>
               </div>
@@ -98,7 +97,7 @@
         <!-- Footer -->
         <footer>
             <p>&copy; 2024 Air Quality Monitoring Dashboard. Data sourced from reliable sources.</p>
-            <a href="https://example.com" target="_blank">External Resource Link</a>
+            <a href="https://openweathermap.org/" target="_blank">External Resource Link</a>
         </footer>
     </div>
 

@@ -1,94 +1,151 @@
-async function fetchLiveData(location) {
+async function fetchCityCoordinates(cityName) {
   try {
     const apiKey = "04027831bf6d0fb2b52e7c423c6ab16b";
-    const coordinates = {
-      seoul: { latitude: 37.5665, longitude: 126.9780 },
-      busan: { latitude: 35.1796, longitude: 129.0756 },
-      daegu: { latitude: 35.8722, longitude: 128.6014 },
-      ub: { latitude: 47.9221, longitude: 106.9155 },
-    };
-
-    const cityCoordinates = coordinates[location.toLowerCase()];
-    if (!cityCoordinates) {
-      throw new Error(`Coordinates not found for location: ${location}`);
-    }
-
-    
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${cityCoordinates.latitude}&lon=${cityCoordinates.longitude}&appid=${apiKey}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch data for ${location}`);
+      throw new Error("Failed to fetch city coordinates.");
     }
 
     const data = await response.json();
-    console.log("API Response:", data);
 
-    // Map the API response to dashboard fields
-    const components = data.list[0].components; // Air quality components
-    const aqi = data.list[0].main.aqi; // Air Quality Index (1-5 scale)
-    const updatedAt = new Date(data.list[0].dt * 1000); // Convert Unix timestamp to Date
+    if (data.length === 0) {
+      throw new Error("City not found.");
+    }
 
-    return {
-      aqi: aqi || "N/A",
-      co: components.co || "N/A", // Carbon Monoxide
-      no: components.no || "N/A", // Nitric Oxide
-      no2: components.no2 || "N/A", // Nitrogen Dioxide
-      o3: components.o3 || "N/A", // Ozone
-      so2: components.so2 || "N/A", // Sulfur Dioxide
-      pm25: components.pm2_5 || "N/A", // PM2.5
-      pm10: components.pm10 || "N/A", // PM10
-      nh3: components.nh3 || "N/A", // Ammonia
-      updatedAt: updatedAt.toLocaleString(),
-    };
+    const latitude = data[0].lat;
+    const longitude = data[0].lon;
+    const foundcountry = data[0].country;
+    const foundcity = data[0].name
+    const foundstate = data[0].state || "N/A"; // Handle cases where state might be undefined
+
+
+    return { latitude, longitude, foundcountry, foundcity, foundstate };
+
   } catch (error) {
-    console.error("Error fetching live data:", error);
-    alert(`Failed to fetch data for ${location}. Ends bolku bhshig bn.`);
+    console.error("Error fetching city coordinates:", error);
+    alert("City not found. Please enter a valid city name.");
     return null;
   }
 }
 
 
 
-async function updateDashboard(location) {
-  const data = await fetchLiveData(location);
+
+
+async function fetchLiveData( {foundcountry, foundcity, foundstate, latitude, longitude }) {
+  try {
+    const apiKey = "04027831bf6d0fb2b52e7c423c6ab16b";
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
+    );
+
+    const secresponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
+    );
+
+
+    if (!response.ok || !secresponse.ok) {
+      throw new Error("Failed to fetch air quality data.");
+    }
+
+    const data = await response.json();
+    const secdata = await secresponse.json();
+    console.log("API Response:", data);
+    console.log("Second API Response:", secdata);
+
+    const components = data.list[0].components;
+    const aqi = data.list[0].main.aqi;
+    const updatedAt = new Date(data.list[0].dt * 1000);
+
+    return {
+      aqi: aqi || "N/A",
+      co: components.co || "N/A",
+      no: components.no || "N/A",
+      no2: components.no2 || "N/A",
+      o3: components.o3 || "N/A",
+      so2: components.so2 || "N/A",
+      pm25: components.pm2_5 || "N/A",
+      pm10: components.pm10 || "N/A",
+      nh3: components.nh3 || "N/A",
+      updatedAt: updatedAt.toLocaleString(),
+    };
+  } catch (error) {
+    console.error("Error fetching air quality data:", error);
+    alert("Failed to fetch air quality data. Please try again.");
+    return null;
+  }
+}
+
+
+
+
+
+async function updateDashboard(coordinates) {
+  const { foundcountry, foundcity, foundstate, latitude, longitude } = coordinates;
+  const data = await fetchLiveData(coordinates);
 
   if (!data) {
     return;
   }
-
-  // Update the dashboard fields
+  if (foundstate == "N/A"){
+    document.getElementById("foundcity").innerText = `${foundcity}, ${foundcountry}`;
+  }
+  else {
+  document.getElementById("foundcity").innerText = `${foundcity}, ${foundcountry}, ${foundstate}`;
+  }
   document.getElementById("aqi").innerText = `${data.aqi}`;
   document.getElementById("co").innerText = `${data.co} µg/m³`;
   document.getElementById("pm25").innerText = `${data.pm25} µg/m³`;
   document.getElementById("pm10").innerText = `${data.pm10} µg/m³`;
   document.getElementById("no").innerText = `${data.no} µg/m³`;
   document.getElementById("nh3").innerText = `${data.nh3} µg/m³`;
-  document.getElementById("no2").innerText = `${data.no2} µg/m³`; 
+  document.getElementById("no2").innerText = `${data.no2} µg/m³`;
   document.getElementById("so2").innerText = `${data.so2} µg/m³`;
-  document.getElementById("o3").innerText = `${data.o3} µg/m³`; 
+  document.getElementById("o3").innerText = `${data.o3} µg/m³`;
   document.getElementById("last-updated").innerText = `${data.updatedAt}`;
 
-  console.log(`Live data for ${location}:`, data);
-
   updateCharts(data);
-  // Hide loading and display data
+
   document.getElementById("loading").style.display = "none";
   document.getElementById("charts").style.display = "block";
 }
 
 
 
-document.querySelector(".update-button").addEventListener("click", () => {
-  const location = document.getElementById("station").value;
+
+document.querySelector(".search-button").addEventListener("click", async () => {
+  const cityName = document.getElementById("city-search").value.trim();
+
+  if (!cityName) {
+    alert("Please enter a city name.");
+    return;
+  }
 
   // Show loading state
   document.getElementById("loading").style.display = "block";
   document.getElementById("charts").style.display = "none";
 
-  updateDashboard(location); // Call updateDashboard with the selected city
+  const coordinates = await fetchCityCoordinates(cityName);
+
+  if (!coordinates) {
+    return; // Handle case where city is not found
+  }
+
+  const { foundcountry, foundcity, foundstate, latitude, longitude } = coordinates;
+
+  console.log("Country:", foundcountry);
+  console.log("City:", foundcity);
+  console.log("State:", foundstate);
+  console.log("Latitude:", latitude);
+  console.log("Longitude:", longitude);
+
+  // Fetch air quality data and update dashboard
+  await updateDashboard({ foundcountry, foundcity, foundstate, latitude, longitude });
 });
+
 
 let barChart, lineChart;
 
