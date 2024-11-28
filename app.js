@@ -47,20 +47,28 @@ async function fetchLiveData( {foundcountry, foundcity, foundstate, latitude, lo
     );
 
 
-    if (!response.ok || !secresponse.ok) {
+    if (!response.ok) {
       throw new Error("Failed to fetch air quality data.");
+    }
+    if (!secresponse.ok) {
+      throw new Error("Failed to fetch weather data.");
     }
 
     const data = await response.json();
     const secdata = await secresponse.json();
-    console.log("API Response:", data);
-    console.log("Second API Response:", secdata);
+    console.log("AQ API Response:", data);
+    console.log("Weather API Response:", secdata);
 
-    const components = data.list[0].components;
-    const aqi = data.list[0].main.aqi;
-    const updatedAt = new Date(data.list[0].dt * 1000);
+
+    const components = data.list[0]?.components || {}; // Ensure components is defined
+    const aqi = data.list[0]?.main.aqi || "N/A"; // Ensure aqi is defined
+    const main = secdata.main || {}; // Ensure main is defined
+    const updatedAt = new Date(data.list[0]?.dt * 1000).toLocaleString() || "N/A";
+    const temperatureCelsius = main.temp ? (main.temp - 273.15).toFixed(1) : "N/A";
 
     return {
+      temperature: temperatureCelsius || "N/A",
+      humidity: main.humidity || "N/A",
       aqi: aqi || "N/A",
       co: components.co || "N/A",
       no: components.no || "N/A",
@@ -70,7 +78,7 @@ async function fetchLiveData( {foundcountry, foundcity, foundstate, latitude, lo
       pm25: components.pm2_5 || "N/A",
       pm10: components.pm10 || "N/A",
       nh3: components.nh3 || "N/A",
-      updatedAt: updatedAt.toLocaleString(),
+      updatedAt,
     };
   } catch (error) {
     console.error("Error fetching air quality data:", error);
@@ -88,14 +96,19 @@ async function updateDashboard(coordinates) {
   const data = await fetchLiveData(coordinates);
 
   if (!data) {
+    alert("No data available for the selected location.");
+    document.getElementById("loading").style.display = "none";
     return;
   }
-  if (foundstate == "N/A"){
+
+  if (foundstate === "N/A") {
     document.getElementById("foundcity").innerText = `${foundcity}, ${foundcountry}`;
+  } else {
+    document.getElementById("foundcity").innerText = `${foundcity}, ${foundcountry}, ${foundstate}`;
   }
-  else {
-  document.getElementById("foundcity").innerText = `${foundcity}, ${foundcountry}, ${foundstate}`;
-  }
+
+  document.getElementById("temperature").innerText = `${data.temperature} °C`;
+  document.getElementById("humidity").innerText = `${data.humidity} %`;
   document.getElementById("aqi").innerText = `${data.aqi}`;
   document.getElementById("co").innerText = `${data.co} µg/m³`;
   document.getElementById("pm25").innerText = `${data.pm25} µg/m³`;
@@ -112,6 +125,7 @@ async function updateDashboard(coordinates) {
   document.getElementById("loading").style.display = "none";
   document.getElementById("charts").style.display = "block";
 }
+
 
 
 
