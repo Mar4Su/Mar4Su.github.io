@@ -131,7 +131,7 @@ async function updateDashboard(coordinates) {
 
 
 document.querySelector(".search-button").addEventListener("click", async () => {
-  const cityName = document.getElementById("city-search").value.trim();
+  var cityName = document.getElementById("city-search").value.trim();
 
   if (!cityName) {
     alert("Please enter a city name.");
@@ -191,7 +191,7 @@ function updateCharts(data) {
 
 
 
-
+//
 function initializeCharts() {
   const barChartCtx = document.getElementById("barChart").getContext("2d");
   const lineChartCtx = document.getElementById("lineChart").getContext("2d");
@@ -277,3 +277,42 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeCharts(); // Initialize charts on page load
   console.log("Charts initialized");
 });
+
+document.getElementById("temperaturecard").addEventListener("click", () => {
+  //const { latitude, longitude } = currentCoordinates; // Ensure these are globally accessible
+  window.location.href = `weather.html`;
+});
+
+document.getElementById("aqicard").addEventListener("click", (cityName) => {
+  window.location.href = `aqi.html`;
+  
+  
+
+  document.getElementById("loading").style.display = "block";
+  document.getElementById("charts").style.display = "none";
+
+  const coordinates = fetchCityCoordinates(cityName);
+
+  if (!coordinates) {
+    return; // Handle case where city is not found
+  }
+
+  const { foundcountry, foundcity, foundstate, latitude, longitude } = coordinates;
+
+  console.log("Country:", foundcountry);
+  console.log("City:", foundcity);
+  console.log("State:", foundstate);
+  console.log("Latitude:", latitude);
+  console.log("Longitude:", longitude);
+
+  // Fetch air quality data and update dashboard
+  updateDashboard({ foundcountry, foundcity, foundstate, latitude, longitude });
+
+
+});
+
+document.getElementById("foundcitycard").addEventListener("click", () => {
+  //const { latitude, longitude } = currentCoordinates; // Ensure these are globally accessible
+  window.location.href = `citymap.html`;
+});
+
