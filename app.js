@@ -101,6 +101,12 @@ document.querySelector(".search-button").addEventListener("click", async () => {
 
 //Switch to Weather.html & init
 document.getElementById("temperaturecard").addEventListener("click", () => {
+  const cityName = localStorage.getItem("selectedCity");
+  if (!cityName) {
+    alert("Please search for a city first.");
+    return;
+  }
+
   window.location.href = `weather.html`;
 });
 
