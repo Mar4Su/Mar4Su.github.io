@@ -384,3 +384,35 @@ footer a:hover {
     margin: 5px 0;
   }
   
+
+  .weather-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .weather-card:hover {
+    cursor: pointer;
+    background-color: #eef;
+  }
+  .back-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(135deg, #800080, #ff69b4);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background: linear-gradient(135deg,#f10079, #410041);
+  }
+  
