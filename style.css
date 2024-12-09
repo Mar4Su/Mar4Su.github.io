@@ -416,3 +416,11 @@ footer a:hover {
     background: linear-gradient(135deg,#f10079, #410041);
   }
   
+  #map {
+    width: 100%;
+    height: 500px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+

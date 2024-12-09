@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Maps and Places Autocomplete</title>
+    <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6">
+    </script>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <gmpx-api-loader key="AIzaSyD1cxaSpUNQmw6j70WxCbJT9WAeSMCB8uk" solution-channel="GMP_GE_mapsandplacesautocomplete_v1">
+    </gmpx-api-loader>
+    <gmp-map center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID">
+      <div slot="control-block-start-inline-start" class="place-picker-container">
+        <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+      </div>
+      <gmp-advanced-marker></gmp-advanced-marker>
+    </gmp-map>
+  </body>
+</html>

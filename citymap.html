@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Air Quality Monitoring Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Map - Air Quality Monitoring Dashboard</title>
+  <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6">
+    </script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Sidebar Navigation -->
-    <div class="sidebar">
-        <h2>Dashboard</h2>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="faq.html">FAQs</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="citymap.html">World Map</a></li>
-            <li><a href="weather.html">Forecast</a></li>
-            <li><a href="aqi.html">Air Quality</a></li>
-        </ul>
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="faq.html">FAQs</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="citymap.html">World Map</a></li>
+      <li><a href="weather.html">Forecast</a></li>
+      <li><a href="aqi.html">Air Quality</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Header -->
+    <header>
+      <h1>City Map</h1>
+    </header>
+
+    <!-- Map Container -->
+    <div id="map" style="height: 500px;">
+        <gmpx-api-loader key="AIzaSyD1cxaSpUNQmw6j70WxCbJT9WAeSMCB8uk" solution-channel="GMP_GE_mapsandplacesautocomplete_v1">
+        </gmpx-api-loader>
+        <gmp-map center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID">
+          <div slot="control-block-start-inline-start" class="place-picker-container">
+            <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+          </div>
+          <gmp-advanced-marker></gmp-advanced-marker>
+        </gmp-map>
     </div>
 
-    <!-- Main Content Area -->
-    <div class="main-content">
-        <!-- Header -->
-        <header>
-            <h1>Weather</h1>
-        </header>
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Air Quality Monitoring Dashboard. All rights reserved.</p>
+      <a href="https://openweathermap.org/" target="_blank">External Resource Link</a>
+    </footer>
+  </div>
 
-        <!-- About Section Content -->
-        <section class="about-content">
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2024 Air Quality Monitoring Dashboard. All rights reserved.</p>
-            <a href="https://openweathermap.org/" target="_blank">External Resource Link</a>
-        </footer>
-    </div>
+  <!-- Google Maps Script -->
+  <script src="citymap.js"></script>
+  <script src="functions.js"></script>
 </body>
 </html>

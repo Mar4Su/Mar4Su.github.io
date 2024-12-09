@@ -127,6 +127,11 @@ document.getElementById("aqicard").addEventListener("click", () => {
 
 //Switch to citymap.html & init
 document.getElementById("foundcitycard").addEventListener("click", () => {
+  const cityName = localStorage.getItem("selectedCity");
+  if (!cityName) {
+    alert("Please search for a city first.");
+    return;
+  }
   window.location.href = `citymap.html`;
 });
 
