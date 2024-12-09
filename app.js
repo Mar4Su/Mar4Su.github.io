@@ -13,17 +13,17 @@ async function updateDashboard(coordinates) {
     document.getElementById("foundcity").innerText = `${foundcity}, ${foundcountry}, ${foundstate}`;
   }
   document.getElementById("temperature").innerText = `${data.temperature} °C`;
-  document.getElementById("humidity").innerText = `${data.humidity} %`;
+  //document.getElementById("humidity").innerText = `${data.humidity} %`;
   document.getElementById("aqi").innerText = `${data.aqi}`;
-  document.getElementById("co").innerText = `${data.co} µg/m³`;
-  document.getElementById("pm25").innerText = `${data.pm25} µg/m³`;
-  document.getElementById("pm10").innerText = `${data.pm10} µg/m³`;
-  document.getElementById("no").innerText = `${data.no} µg/m³`;
-  document.getElementById("nh3").innerText = `${data.nh3} µg/m³`;
-  document.getElementById("no2").innerText = `${data.no2} µg/m³`;
-  document.getElementById("so2").innerText = `${data.so2} µg/m³`;
-  document.getElementById("o3").innerText = `${data.o3} µg/m³`;
-  document.getElementById("last-updated").innerText = `${data.updatedAt}`;
+  //document.getElementById("co").innerText = `${data.co} µg/m³`;
+  //document.getElementById("pm25").innerText = `${data.pm25} µg/m³`;
+  //document.getElementById("pm10").innerText = `${data.pm10} µg/m³`;
+  //document.getElementById("no").innerText = `${data.no} µg/m³`;
+  //document.getElementById("nh3").innerText = `${data.nh3} µg/m³`;
+  //document.getElementById("no2").innerText = `${data.no2} µg/m³`;
+  //document.getElementById("so2").innerText = `${data.so2} µg/m³`;
+  //document.getElementById("o3").innerText = `${data.o3} µg/m³`;
+  //document.getElementById("last-updated").innerText = `${data.updatedAt}`;
 
   updateCharts(data);
 }
@@ -67,14 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.querySelector(".search-button").addEventListener("click", async () => {
-  cityName = document.getElementById("city-search").value.trim();
-  alert("The cityname is", cityName);
-  console.log("Cityname:", cityName);
+  const cityName = document.getElementById("city-search").value.trim();
 
   if (!cityName) {
     alert("Please enter a city name.");
     return;
   }
+
+  localStorage.setItem("selectedCity", cityName);
 
   const coordinates = await fetchCityCoordinatesFS(cityName);
 
@@ -103,34 +103,14 @@ document.getElementById("temperaturecard").addEventListener("click", () => {
 
 //Switch to aqi.html & init
 document.getElementById("aqicard").addEventListener("click", () => {
-
-
-  window.location.href = `aqi.html`;
+  const cityName = localStorage.getItem("selectedCity");
   if (!cityName) {
-    alert("Please enter a city name.");
+    alert("Please search for a city first.");
     return;
   }
 
-  // Show loading state
-  document.getElementById("loading").style.display = "block";
-  document.getElementById("charts").style.display = "none";
-
-  const coordinates = fetchCityCoordinatesFS(cityName);
-
-  if (!coordinates) {
-    return; // Handle case where city is not found
-  }
-
-  const { foundcountry, foundcity, foundstate, latitude, longitude } = coordinates;
-
-  console.log("Country:", foundcountry);
-  console.log("City:", foundcity);
-  console.log("State:", foundstate);
-  console.log("Latitude:", latitude);
-  console.log("Longitude:", longitude);
-
-  // Fetch air quality data and update dashboard
-  updateDashboard({ foundcountry, foundcity, foundstate, latitude, longitude });
+  // Navigate to aqi.html
+  window.location.href = `aqi.html`;
 });
 
 
