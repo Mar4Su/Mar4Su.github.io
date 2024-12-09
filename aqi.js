@@ -20,6 +20,24 @@ async function updateDashboard(coordinates) {
     document.getElementById("so2").innerText = `${data.so2} µg/m³`;
     document.getElementById("o3").innerText = `${data.o3} µg/m³`;
     document.getElementById("last-updated").innerText = `${data.updatedAt}`;
+
+    const { barChart, lineChart } = initializeChartsFS();
+    const pollutants = [
+    data.pm25/10,
+    data.pm10/20,
+    data.no/10,
+    data.nh3/12.5,
+    data.co/419.3,
+    data.so2/12.5,
+    data.o3/35,
+    ];
+
+  // Update charts
+  barChart.data.datasets[0].data = pollutants;
+  barChart.update();
+
+  lineChart.data.datasets[0].data = pollutants;
+  lineChart.update();
   }
 
 async function aqidisplay() {

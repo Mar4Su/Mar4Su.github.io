@@ -25,7 +25,6 @@ async function updateDashboard(coordinates) {
   //document.getElementById("o3").innerText = `${data.o3} µg/m³`;
   //document.getElementById("last-updated").innerText = `${data.updatedAt}`;
 
-  updateCharts(data);
 }
 
 
@@ -49,18 +48,23 @@ function updateCharts(data) {
   if (barChart) {
     barChart.data.datasets[0].data = pollutants; // Update data points
     barChart.update(); // Refresh the chart
+  } else {
+    console.warn("Bar chart is not initialized.");
   }
 
   // Update Line Chart
   if (lineChart) {
     lineChart.data.datasets[0].data = pollutants; // Update data points
     lineChart.update(); // Refresh the chart
+  } else {
+    console.warn("Line chart is not initialized.");
+    document.getElementById("charts").style.display = "block"; // Show charts
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initializeChartsFS(); // Initialize charts on page load
-  console.log("Charts initialized");
+  //initializeChartsFS(); // Initialize charts on page load
+  //console.log("Charts initialized");
 });
 
 
