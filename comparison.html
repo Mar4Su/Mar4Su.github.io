@@ -9,18 +9,15 @@
     <script defer src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123879/DeviceOrientationControls.js"></script>
     <script defer src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123879/StereoEffect.js"></script>
     <script defer src="earthmain.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script defer src="app.js"></script>
-    <script defer src="functions.js"></script>
+    <title>Air Quality Monitoring Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <title>Air Quality Monitoring</title>
 </head>
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <div class="sidebar">
         <h2>Dashboard</h2>
         <ul>
-            <li><a href="index.html">Home</a></li>
+          <li><a href="index.html">Home</a></li>
             <li><a href="faq.html">FAQs</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="citymap.html">World Map</a></li>
@@ -34,24 +31,42 @@
     <div class="main-content">
         <!-- Header -->
         <header>
-            <h1>Weather</h1>
+            <h1>AQI Comparison</h1>
+            <p>Compare AQI values of up to 3 cities</p>
         </header>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <div class="input-group">
+                <label for="city1">City 1:</label>
+                <input type="text" id="city1" placeholder="Enter city name">
+            </div>
+            <div class="input-group">
+                <label for="city2">City 2:</label>
+                <input type="text" id="city2" placeholder="Enter city name">
+            </div>
+            <div class="input-group">
+                <label for="city3">City 3:</label>
+                <input type="text" id="city3" placeholder="Enter city name">
+            </div>
+            <button id="compare-button">Compare</button>
+        </section>
+
+        <!-- Comparison Results -->
+        <section id="results" style="display: none;">
+            <canvas id="comparisonChart"></canvas>
+            <br>
+            <canvas id="detailedLineChart"></canvas>
+        </section>
         
-
-        <!-- About Section Content -->
-        <section class="about-content">
-            <h2>5-Day Weather Forecast (3-Hour Intervals)</h2>
-          </section>
-          
-
         <!-- Footer -->
-        <footer>
-            <p>&copy; 2024 Air Quality Monitoring Dashboard. All rights reserved.</p>
-            <a href="https://openweathermap.org/" target="_blank">External Resource Link</a>
-        </footer>
+    <footer>
+        <p>&copy; 2024 Air Quality Monitoring Dashboard. All rights reserved.</p>
+    </footer>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="weather.js"></script>
+    <script src="comparison.js"></script>
     <script src="functions.js"></script>
 </body>
 </html>
