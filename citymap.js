@@ -56,7 +56,7 @@ function getAQIColor(aqi) {
   
     // Add an info window with AQI details
     infowindow.setContent(`
-        <div>
+        <div style="color: black; background-color: white; padding: 10px; border-radius: 8px; font-family: Arial, sans-serif;">
             <strong>${cityName}</strong><br>
             AQI: ${aqi}<br>
             Temperature: ${aqiData.temperature || "N/A"}
@@ -92,11 +92,14 @@ function getAQIColor(aqi) {
         marker.position = place.location;
     
         infowindow.setContent(`
-            <strong>${place.displayName}</strong><br>
-            <span>${place.formattedAddress}</span><br>
-            AQI: ${aqi}<br>
-            Temperature: ${aqiData.temperature || "N/A"}
+            <div style="color: black; background-color: white; padding: 10px; border-radius: 8px; font-family: Arial, sans-serif;">
+                <strong>${place.displayName}</strong><br>
+                <span>${place.formattedAddress}</span><br>
+                AQI: ${aqi}<br>
+                Temperature: ${aqiData.temperature || "N/A"}
+            </div>
         `);
+        
         infowindow.open(map.innerMap, marker);
     });
   }

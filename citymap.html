@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>City Map - Air Quality Monitoring Dashboard</title>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script defer src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123879/three.min.js"></script> 
+  <script defer src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123879/OrbitControls.js"></script>
+  <script defer src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123879/DeviceOrientationControls.js"></script>
+  <script defer src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123879/StereoEffect.js"></script>
+  <script defer src="earthmain.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="app.js"></script>
+  <script defer src="functions.js"></script>
+  <script defer src="citymap.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <title>Air Quality Monitoring</title>
   <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6">
     </script>
   <link rel="stylesheet" href="style.css">
@@ -30,7 +42,7 @@
     </header>
 
     <!-- Map Container -->
-    <div id="map" style="height: 500px;">
+    <div id="map">
         <gmpx-api-loader key="AIzaSyD1cxaSpUNQmw6j70WxCbJT9WAeSMCB8uk" solution-channel="GMP_GE_mapsandplacesautocomplete_v1">
         </gmpx-api-loader>
         <gmp-map center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID">

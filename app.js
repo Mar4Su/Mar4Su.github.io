@@ -76,6 +76,11 @@ document.querySelector(".search-button").addEventListener("click", async () => {
   if (!cityName) {
     alert("Please enter a city name.");
     return;
+  } else {
+        // Fade-in the cards
+        const cards = document.querySelector('.cards');
+        cards.classList.remove('hidden');
+        cards.classList.add('visible');
   }
 
   localStorage.setItem("selectedCity", cityName);
@@ -96,6 +101,12 @@ document.querySelector(".search-button").addEventListener("click", async () => {
 
   // Fetch air quality data and update dashboard
   await updateDashboard({ foundcountry, foundcity, foundstate, latitude, longitude });
+});
+
+document.querySelector('.cards-hide').addEventListener('click', function () {
+  const cards = document.querySelector('.cards');
+  cards.classList.add('hidden');
+  cards.classList.remove('visible');
 });
 
 

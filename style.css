@@ -1,27 +1,21 @@
-/* Reset default styles */
-* {
+/* General Styles */
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Layout structure */
-body {
-    display: flex;
-    height: 100vh;
-    color: #060505;
+    background: #000;
+    color: white;
 }
 
 /* Sidebar */
 .sidebar {
-    background: linear-gradient(135deg, #800080, #ff69b4);
-    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 200px;
-    padding: 20px;
+    height: 100%; /* Extend sidebar to full height */
+    background-color: rgba(17, 17, 17, 0.8);
+    padding: 10px;
 }
-
-
 
 .sidebar h2 {
     text-align: center;
@@ -30,7 +24,9 @@ body {
 
 .sidebar ul {
     list-style-type: none;
+    padding: 0;
 }
+
 .sidebar ul li {
     margin: 1em 0;
 }
@@ -39,132 +35,302 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1); /* Link background */
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
 }
 
 .sidebar ul li a:hover {
-    background-color: #800080;
+    transform: translateY(-5px); /* Slight upward movement */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhance shadow */
+    background-color: rgba(255, 255, 255, 0.5); /* Purple hover effect */
+    color: rgba(255, 255, 255, 0.9); /* Slightly brighter text on hover */
 }
 
 .sidebar ul li a:active {
     transform: scale(0.98); /* Slight press effect */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly darker on click */
 }
 
-/* Main Content */
-.main-content {
-    flex: 1;
-    padding: 20px;
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+/* Additional Styles for Consistency */
+.sidebar ul li a span {
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.3s;
+}
+
+.sidebar ul li a:hover span {
+    transform: rotate(10deg); /* Add subtle rotation for icons or elements */
 }
 
 /* Header */
-header {
-    background: linear-gradient(190deg, #800080, #ff69b4);
+.header {
+    position: fixed;
+    top: 0;
+    left: 220px; /* Align with sidebar */
+    width: calc(100% - 220px); /* Fill remaining space */
+    height: 100px; /* Define header height */
+    background-color: rgba(0, 0, 0, 0.85);
     color: white;
-    padding: 1em;
-    border-radius: 5px;
-    text-align: center;
-    position: relative;
-}
-
-/* Top Navigation Bar */
-.top-nav {
-    margin-top: 10px;
-}
-
-.top-nav ul {
-    list-style-type: none;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 20px;
-}
-
-.top-nav ul li {
-    display: inline;
-}
-
-.top-nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.top-nav ul li a:hover {
-    background-color: #800080;
-}
-
-.top-nav ul li a:active {
-    transform: scale(0.98); /* Slight press effect */
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure it stays on top */
 }
 
 
 /* Filters Section */
 .filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    position: fixed;
+    top: 100px; /* Positioned below the header */
+    right: 20px; /* Align filters to the right */
+    width: 250px; /* Fixed width for filters */
+    padding: 15px;
+    background-color: rgba(17, 17, 17, 0.5); /* Transparent background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    z-index: 10; /* Keep it above other elements */
 }
 
-.filters label, .filters select, .filters button {
+/* Filter Group */
+.filter-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input */
+    align-items: flex-start;
+    gap: 10px; /* Space between label and input */
+    margin-bottom: 10px; /* Space between filter groups */
+}
+
+.filter-group label {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.filter-group input {
+    padding: 10px;
+    width: 100%; /* Stretch input to fill container */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px; /* Rounded corners */
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
     font-size: 1em;
 }
 
+.search-button {
+    padding: 10px;
+    width: 109%; /* Stretch button to match input */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.search-button:hover {
+    background-color: rgba(255, 255, 255, 0.4);  /* Slightly darker on hover */
+}
+
+
 /* Cards Section */
 .cards {
+    position: fixed;
+    top: 220px; /* Position below the header */
+    right: 20px; /* Align to the right with spacing */
     display: flex;
-    gap: 20px;
+    flex-direction: column; /* Stack cards vertically */
+    gap: 20px; /* Space between cards */
+    width: 250px; /* Set a fixed width for the cards container */
+    background-color: rgba(17, 17, 17, 0.5); /* Transparent background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    z-index: 10; /* Ensure it stays above other content */
 }
 
+/* Individual Card */
 .card {
-    background: white;
-    border-radius: 5px;
-    padding: 20px;
-    flex: 1;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center content inside the card */
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
 }
 
+/* Card Heading */
 .card h3 {
-    color: #6c006c;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add depth to text */
 }
 
-/* Charts Section */
-.charts {
-    display: flex; /* Enables flexbox */
-    gap: 20px; /* Space between the charts */
-    flex-direction: row; /* Aligns items in a row */
-    justify-content: center; /* Centers the charts horizontally */
-    align-items: center; /* Aligns items vertically */
+/* Card Content */
+.card p {
+    font-size: 1em;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8); /* Softer white for readability */
 }
 
-/* Canvas styling */
-canvas {
-    background: white;
+/* Hover Effect */
+.card:hover {
+    transform: translateY(-5px); /* Slight upward movement */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow */
+}
+
+.hidden {
+    display: none; /* Hide the element initially */
+    opacity: 0; /* Start with zero opacity */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade-in effect */
+}
+
+.cards.visible {
+    display: flex; /* Show the cards in a flex layout */
+    opacity: 1; /* Fully visible */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade-in effect */
+}
+
+.cards-hide {
+    padding: 10px;
+    width: 100%; /* Stretch button to match input */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Adjust this as needed */
-    max-width: 500px; /* Restrict the maximum width */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 300px; /* Restrict the maximum height */
+    cursor: pointer;
+    text-align: center;
+}
+
+.cards-hide:hover {
+    transform: translateY(-5px); /* Slight upward movement */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow */
+}
+
+/* Main Content */
+.main-content {
+    position: fixed;
+    margin-left: 220px;
+    margin-right: 20px; /* Adjust to avoid overlapping the sidebar */
+    padding: 10px;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(17, 17, 17, 0.8);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-size: 1.6em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+header p {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 10px 0 0;
+}
+
+/* FAQ Section */
+.faq-content {
+    background-color: rgba(17, 17, 17, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.faq-content h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.faq-item {
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.faq-item h3 {
+    margin: 0;
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.faq-item p {
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.faq-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* About Content */
+.about-content {
+    background-color: rgba(17, 17, 17, 0.8); /* Transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.about-content h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.about-content p {
+    font-size: 1em;
+    line-height: 1.6; /* Improve readability */
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.about-content ul {
+    list-style-type: disc;
+    padding-left: 40px; /* Indent for better alignment */
+    margin-bottom: 20px;
+}
+
+.about-content ul li {
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1em;
 }
 
 /* Footer */
 footer {
-    background-color: #f1f1f1;
     text-align: center;
-    padding: 10px;
-    border-top: 1px solid #ddd;
+    padding: 20px;
+    background-color: rgba(17, 17, 17, 0.8);
+    border-radius: 10px;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9em;
 }
 
 footer a {
-    color: #800080;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
 }
 
@@ -172,255 +338,221 @@ footer a:hover {
     text-decoration: underline;
 }
 
+/* Map Container */
+#map {
+    margin: 20px auto; /* Centered within its container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    overflow: hidden; /* Ensure content stays within rounded corners */
+    background-color: rgba(0, 0, 0, 0.2); /* Fallback background */
+    width: 200%; /* Full width by default */
+    max-width: 1200px; /* Limit the map's width */
+    height: 400px; /* Fixed height */
+    position: relative; /* Enable stacking for child elements */
+}
 
-
-/* Responsive Styles */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100px;
-    }
-
-    .main-content {
-        padding: 10px;
-    }
-
-    .filters {
-        flex-direction: column;
-    }
-
-    .cards {
-        flex-direction: column;
-    }
-
-    .charts {
-        flex-direction: column;
-    }
-
-    .top-nav ul {
-        flex-direction: column;
-        gap: 10px;
+    #map {
+        height: 300px; /* Reduce height for smaller screens */
     }
 }
 
-.about-content {
-    padding: 20px;
-}
-
-.about-content h2 {
-    color: #800080;
-    margin-top: 20px;
-}
-
-.about-content ul {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-.about-content p, .about-content li {
-    line-height: 1.6;
-}
-
-/* FAQ Page Content */
-.faq-content {
-    padding: 20px;
-}
-
-.faq-content h2 {
-    color: #800080;
-    margin-bottom: 20px;
-}
-
-.faq-item {
-    margin-bottom: 20px;
-}
-
-.faq-item h3 {
-    color: #800080;
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-.faq-item p {
-    line-height: 1.6;
-    margin-left: 20px;
+@media (max-width: 480px) {
+    #map {
+        height: 250px; /* Further reduce height for very small devices */
+        border-radius: 5px; /* Slightly reduce rounding */
+    }
 }
 
 
-.loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    font-size: 1.5em;
-    color: #800080;
-  }
- 
-.filters {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    margin: 1rem auto;
-    background-color: #f8f9fa; /* Light background color */
+.custom-infowindow {
+    color: black;
+    background-color: white;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    max-width: 400px;
+    font-family: Arial, sans-serif;
+    line-height: 1.5; /* Improve readability */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
 }
 
-/* Style the filter group */
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-}
-
-/* Style the label */
-.filter-group label {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333; /* Dark text color */
-}
-
-/* Style the select dropdown */
-.filter-group select {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Dropdown hover and focus effect */
-.filter-group select:focus {
-    border-color: #800080; /* Blue focus border */
-    box-shadow: 0 0 5px rgba(47, 1, 74, 0.5);
-    outline: none;
-}
-
-/* Style the update button */
-.search-button {
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(135deg, #800080, #ff69b4);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Button hover and active effect */
-.search-button:hover {
-    background: linear-gradient(135deg, #410041, #f10079); /* Darker blue */
-}
-
-.search-button:active {
-    transform: scale(0.98); /* Slight press effect */
-}
-
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
-}
-
-.card {
-    background: linear-gradient(135deg, #800080, #ff69b4);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    flex: 1;
-    min-width: 200px;
-}
-.card:hover {
-    background: linear-gradient(135deg,#f10079, #410041); /* Darker blue */
-}
-
-.card:active {
-    transform: scale(0.98); /* Slight press effect */
-}
-
-.card h3 {
-    margin-bottom: 10px;
-    font-size: 1.2em;
-}
-
-.card p {
-    font-size: 1.5em;
-    font-weight: bold;
-}
+/* Weather Card */
 .weather-card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    border: none; /* Remove border */
+    border-radius: 10px; /* Rounded corners */
     padding: 15px;
     margin: 10px;
     display: inline-block;
     text-align: center;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .weather-card img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .weather-card h3 {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  .weather-card p {
+    background-color: rgba(17, 17, 17, 0.8); /* Transparent dark background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animations */
+    color: white; /* Light text for contrast */
+    width: 180px; /* Fixed width for consistent layout */
+    font-family: Arial, sans-serif; /* Ensure readable text */
+}
+
+.weather-card img {
+    width: 60px; /* Larger icon size */
+    height: 60px;
+    margin-bottom: 10px; /* Add spacing below the image */
+}
+
+.weather-card h3 {
+    font-size: 1.2em; /* Larger and more modern font */
+    margin-bottom: 8px; /* Add spacing */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+.weather-card p {
     margin: 5px 0;
-  }
-  
+    color: rgba(255, 255, 255, 0.6); /* Softer white for readability */
+    font-size: 1em; /* Ensure consistent font size */
+}
 
-  .weather-card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px;
-    display: inline-block;
-    text-align: center;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .weather-card:hover {
+.weather-card:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+    background-color: rgba(17, 17, 17, 0.8);; /* Subtle purple background on hover */
     cursor: pointer;
-    background-color: #eef;
-  }
-  .back-button {
+}
+
+/* Back Button */
+.back-button {
     display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background: linear-gradient(135deg, #800080, #ff69b4);
+    margin: 20px auto; /* Center button */
+    padding: 12px 25px;
+    font-size: 1em;
+    color: white;
+    background: rgba(17, 17, 17, 0.6); /* Gradient background */
     border: none;
-    border-radius: 5px;
+    border-radius: 5px; /* Rounded corners */
     cursor: pointer;
-  }
-  
-  .back-button:hover {
-    background: linear-gradient(135deg,#f10079, #410041);
-  }
-  
-  #map {
-    width: 100%;
-    height: 500px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: background 0.3s ease, transform 0.2s ease; /* Smooth animations */
+    text-align: center;
+    font-family: Arial, sans-serif; /* Readable font */
+}
 
+.back-button:hover {
+    background: rgba(17, 17, 17, 0.8); /* Darker gradient on hover */
+    transform: scale(1.05); /* Slight enlarge effect */
+}
+
+
+/* Cards Section */
+.scards {
+    position: absolute; /* Positioned relative to the nearest positioned parent */
+    top: 10px; /* Position below the header */
+    right: 20px; /* Align slightly inside from the right */
+    width: calc(50% - 240px); /* Take the available space on the right, leaving room for main-content and padding */
+    padding: 20px;
+    background-color: rgba(17, 17, 17, 0.8); /* Dark transparent background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    height: calc(100vh - 30px); /* Full height minus header and padding */
+}
+
+/* Individual Card */
+.scard {
+    margin-bottom: 15px; /* Space between cards */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners */
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animations */
+    color: white; /* Light text for contrast */
+    text-align: center; /* Center text inside the cards */
+}
+
+/* Card Heading */
+.scard h3 {
+    font-size: 1.2em; /* Larger font size for the heading */
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+/* Card Content */
+.scard p {
+    font-size: 1em;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8); /* Softer white for readability */
+}
+
+/* Hover Effect */
+.scard:hover {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+    background-color: rgba(17, 17, 17, 0.8); /* Subtle purple background on hover */
+}
+
+/* Scrollbar Styling */
+.scards::-webkit-scrollbar {
+    width: 8px; /* Narrow scrollbar */
+}
+
+.scards::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3); /* Purple scrollbar */
+    border-radius: 10px; /* Rounded scrollbar */
+}
+
+.scards::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 1); /* Brighter purple on hover */
+}
+
+/* Charts Section */
+#charts {
+    display: flex; /* Arrange canvases side by side */
+    justify-content: space-around; /* Add space between charts */
+    align-items: center; /* Center align the charts vertically */
+    padding: 20px;
+    background-color: rgba(17, 17, 17, 0.8); /* Dark transparent background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    margin: 20px auto; /* Center the section horizontally */
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 450px; /* Limit the maximum width */
+}
+
+/* Charts Section */
+#charts {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack charts vertically */
+    justify-content: center; /* Center charts vertically */
+    align-items: center; /* Center charts horizontally */
+    padding: 20px;
+    background-color: rgba(17, 17, 17, 0.8); /* Dark transparent background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    margin: 20px auto; /* Center the section horizontally */
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 800px; /* Limit the maximum width */
+}
+
+/* Individual Canvas */
+#charts canvas {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 10px; /* Rounded corners for charts */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow around each chart */
+    padding: 10px; /* Add spacing around the chart */
+    width: 100%; /* Full width for each chart */
+    height: 400px; /* Set a fixed height for charts */
+    margin-bottom: 20px; /* Space between the charts */
+}
+
+/* Remove bottom margin from the last canvas */
+#charts canvas:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #charts {
+        padding: 15px;
+    }
+
+    #charts canvas {
+        height: 300px; /* Adjust chart height for smaller screens */
+    }
+}
